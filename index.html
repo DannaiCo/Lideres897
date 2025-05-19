@@ -84,10 +84,10 @@
       const parser = new DOMParser();
       const doc = parser.parseFromString(texto, "text/html");
 
-      document.getElementById("Rosa").textContent = doc.getElementById("Rosa").textContent;
-      document.getElementById("Ciclamino").textContent = doc.getElementById("Ciclamino").textContent;
-      document.getElementById("Azurra").textContent = doc.getElementById("Azurra").textContent;
-      document.getElementById("Bianca").textContent = doc.getElementById("Bianca").textContent;
+      document.getElementById("Rosa").innerHTML = doc.getElementById("Rosa").innerHTML;
+      document.getElementById("Ciclamino").innerHTML = doc.getElementById("Ciclamino").innerHTML;
+      document.getElementById("Azurra").innerHTML = doc.getElementById("Azurra").innerHTML;
+      document.getElementById("Bianca").innerHTML = doc.getElementById("Bianca").innerHTML;
       
     } catch (err) {
       console.error("Error cargando los datos:", err);
