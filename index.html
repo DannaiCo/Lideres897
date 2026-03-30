@@ -2,101 +2,111 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Lideres Giro d’Italia</title>
-  <meta http-equiv="refresh" content="180">
+  <title>Frases</title>
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
+      background: #000;
       overflow: hidden;
-      height: 192px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .contenedor {
       width: 897px;
-      font-family: 'Open Sans', sans-serif;
-      position: relative;
-    }
-
-    video#fondo {
+      height: 192px;
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      transform-origin: top left;
+    }
+
+    /* 🎥 VIDEO */
+    video {
+      position: absolute;
+      width: 897px;
+      height: 192px;
       object-fit: cover;
-      z-index: -1;
+      z-index: 0;
     }
 
-    .tabla {
+    /* 📝 FRASE */
+    .frase-contenedor {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      font-weight: Bold;
-	  text-transform: uppercase;
-      color: #ffa1ce;
-      font-family: Open Sans, sans-serif;
-	  font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
     }
 
-    .fila {
-      position: absolute;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
+    #frase {
+      font-family: "Dela Gothic One", sans-serif;
+      font-size: 48px;
+      color: white;
+      text-align: center;
+      letter-spacing: 2px;
+      line-height: 1.1;
       padding: 0 20px;
     }
-
-    /* Posiciones personalizadas */
-    #Rosa, #Ciclamino, #Azurra,
-    #Bianca {
-      position: absolute;
-      font-size: 16px;
-      background-color: transparent;
-      padding: 2px 6px;
-      border-radius: 5px;
-      line height:100%;
-    }
-
-    /* FILA 1 */
-    #Rosa { top: 140px; left: 300px; }
-    #Ciclamino { top: 140px; left: 440px; }
-    #Azurra { top: 140px; left: 580px; }
-    #Bianca { top: 140px; left: 730px; }
   </style>
 </head>
-<body>
-  <video autoplay muted loop id="fondo">
-    <source src="fondo.mp4" type="video/mp4">
-    Tu navegador no soporta el video.
-  </video>
 
-  <div class="tabla">
-    <div id="Rosa">---</div>
-    <div id="Ciclamino">---</div>
-    <div id="Azurra">---</div>
-    <div id="Bianca">---</div>
+<body>
+  <div class="contenedor" id="contenedor">
+
+    <video autoplay muted loop playsinline>
+      <source src="fondo.mp4" type="video/mp4">
+    </video>
+
+    <div class="frase-contenedor">
+      <div id="frase">Cargando...</div>
+    </div>
+
   </div>
 
   <script>
-  async function cargarDatos() {
-    try {
-      const res = await fetch("https://dannaico.github.io/MLideres/datos.html");
-      const texto = await res.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(texto, "text/html");
+    const frases = [
+      "Aún estás a tiempo de empezar de nuevo.",
+      "Perdonar también te libera.",
+      "Agradecer cambia el día.",
+      "Alguien necesita tu ayuda hoy.",
+      "Una palabra amable cambia el día.",
+      "Hoy puedes elegir la calma.",
+      "Lo simple también transforma.",
+      "Ayudar también te cambia.",
+      "Un momento de silencio ayuda."
+    ];
 
-      document.getElementById("Rosa").innerHTML = doc.getElementById("Rosa").innerHTML;
-      document.getElementById("Ciclamino").innerHTML = doc.getElementById("Ciclamino").innerHTML;
-      document.getElementById("Azurra").innerHTML = doc.getElementById("Azurra").innerHTML;
-      document.getElementById("Bianca").innerHTML = doc.getElementById("Bianca").innerHTML;
-      
-    } catch (err) {
-      console.error("Error cargando los datos:", err);
+    const elemento = document.getElementById("frase");
+
+    function cambiarFrase() {
+      const randomIndex = Math.floor(Math.random() * frases.length);
+      elemento.textContent = frases[randomIndex];
     }
-  }
 
-  cargarDatos();
-  setInterval(cargarDatos, 30000);
-</script>
+    cambiarFrase();
+    setInterval(cambiarFrase, 5000);
+
+    // 🔍 Escalado opcional
+    function escalar() {
+      const escalaX = window.innerWidth / 897;
+      const escalaY = window.innerHeight / 192;
+      const escala = Math.min(escalaX, escalaY);
+
+      document.getElementById("contenedor").style.transform = `scale(${escala})`;
+    }
+
+    window.addEventListener("resize", escalar);
+    escalar();
+  </script>
 </body>
 </html>
