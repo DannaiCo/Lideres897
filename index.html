@@ -37,15 +37,18 @@
       z-index: 0;
     }
 
-    /* 📝 FRASE */
+    /* 🎯 CONTENEDOR CON COORDENADAS */
     .frase-contenedor {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      top: 50px;   /* 🔧 AJUSTA AQUÍ */
+      left: 50px;  /* 🔧 AJUSTA AQUÍ */
+      width: 800px; /* 🔧 AJUSTA AQUÍ */
+      height: 100px; /* 🔧 AJUSTA AQUÍ */
+      z-index: 1;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1;
     }
 
     #frase {
@@ -55,7 +58,6 @@
       text-align: center;
       letter-spacing: 2px;
       line-height: 1.1;
-      padding: 0 20px;
     }
   </style>
 </head>
@@ -96,7 +98,6 @@
     cambiarFrase();
     setInterval(cambiarFrase, 5000);
 
-    // 🔍 Escalado opcional
     function escalar() {
       const escalaX = window.innerWidth / 897;
       const escalaY = window.innerHeight / 192;
